@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar | Resolve Aqui</title>
+  <meta name="description" content="Resolve Aqui: plataforma digital cívica para registrar, acompanhar e apoiar reclamações sobre serviços públicos municipais de Itapetininga.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topo" id="topo"></header>
+  <main id="conteudo">
+    <div class="introducao">
+      <h1>Entrar no Resolve Aqui</h1>
+      <p>Qualquer pessoa pode ver as reclamações. Para registrar, apoiar ou comentar, entre na sua conta ou crie uma.</p>
+    </div>
+    <div class="formulario">
+      <div class="abas" role="tablist">
+        <button type="button" role="tab" id="aba-entrar" aria-selected="true" aria-controls="form-entrar">Entrar</button>
+        <button type="button" role="tab" id="aba-cadastrar" aria-selected="false" aria-controls="form-cadastrar">Criar conta</button>
+      </div>
+      <div class="erro" id="erro" role="alert"></div>
+
+      <form id="form-entrar" role="tabpanel" aria-labelledby="aba-entrar" novalidate>
+        <div class="campo">
+          <label for="e-email">E-mail</label>
+          <input type="email" id="e-email" autocomplete="email" required>
+        </div>
+        <div class="campo">
+          <label for="e-senha">Senha</label>
+          <input type="password" id="e-senha" autocomplete="current-password" required>
+        </div>
+        <button class="botao" type="submit">Entrar</button>
+      </form>
+
+      <form id="form-cadastrar" role="tabpanel" aria-labelledby="aba-cadastrar" hidden novalidate>
+        <div class="campo">
+          <label for="c-nome">Nome completo</label>
+          <input id="c-nome" autocomplete="name" required>
+        </div>
+        <div class="duas-colunas">
+          <div class="campo">
+            <label for="c-email">E-mail</label>
+            <input type="email" id="c-email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="c-bairro">Bairro onde mora</label>
+            <select id="c-bairro" required></select>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="c-senha">Senha</label>
+          <input type="password" id="c-senha" autocomplete="new-password" minlength="6" required aria-describedby="dica-senha">
+          <span class="dica" id="dica-senha">Use pelo menos 6 caracteres.</span>
+        </div>
+        <button class="botao" type="submit">Criar conta</button>
+      </form>
+
+      <div class="demo">
+        <strong>Contas de demonstração</strong> (senha <code>demo1234</code>):
+        <ul>
+          <li><code>maria@demo.com</code>: munícipe</li>
+          <li><code>gestor@demo.com</code>: ouvidoria, pode alterar o status das reclamações</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <footer class="rodape" id="rodape"></footer>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/entrar.js"></script>
+</body>
+</html>
