@@ -18,10 +18,10 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 ## Tecnologias
 
 - HTML, CSS e JavaScript, sem frameworks
-- Banco de dados relacional modelado em SQL (`schema.sql`)
+- Banco de dados relacional modelado em SQL (`database/schema.sql`)
 - Versionamento no GitHub e hospedagem na Vercel
 
-Nesta versão de protótipo, os dados ficam no `localStorage` do navegador, simulando as tabelas do banco. Assim o sistema roda como site estático, sem servidor. O arquivo `data.js` concentra todo o acesso aos dados, para que possa ser trocado por chamadas a uma API real sem mudar as páginas.
+Nesta versão de protótipo, os dados ficam no `localStorage` do navegador, simulando as tabelas do banco. Assim o sistema roda como site estático, sem servidor. O arquivo `js/data.js` concentra todo o acesso aos dados, para que possa ser trocado por chamadas a uma API real sem mudar as páginas.
 
 ## Contas de demonstração
 
@@ -43,11 +43,7 @@ Basta abrir o `index.html` no navegador. Para servir localmente:
 npx serve .
 ```
 
-## Publicar
-
-No GitHub Pages: em **Settings > Pages**, escolha a branch `main` e a pasta `/ (root)`.
-
-### Na Vercel
+## Publicar na Vercel
 
 1. Em vercel.com, clique em **Add New > Project** e importe este repositório.
 2. Em **Framework Preset**, escolha **Other**. Não é preciso comando de build.
@@ -61,11 +57,11 @@ nova.html         Registro de reclamação
 reclamacao.html   Detalhe, apoio, comentários e andamento
 entrar.html       Login e cadastro
 painel.html       Painel com números gerais
-style.css         Estilos
-data.js           Camada de dados (localStorage)
-ui.js             Funções de interface compartilhadas
-inicio.js, nova.js, reclamacao.js, entrar.js, painel.js   Script de cada página
-schema.sql        Modelo do banco de dados
+css/style.css     Estilos
+js/data.js        Camada de dados (localStorage)
+js/ui.js          Funções de interface compartilhadas
+js/*.js           Script de cada página
+database/schema.sql  Modelo do banco de dados
 ```
 
 ## Limitações conhecidas
