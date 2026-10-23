@@ -965,3 +965,17 @@ textarea:focus {
 	font-size: 0.9rem;
 	color: var(--vermelho);
 }
+
+/* ---------- Aviso de reclamações parecidas ---------- */
+
+.parecidas {
+	margin: 0.6rem 0 0;
+	padding-left: 1.2rem;
+}
+.parecidas li {
+	margin: 0.25rem 0;
+}
+.parecidas small {
+	display: block;
+	color: var(--asfalto-suave);
+}

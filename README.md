@@ -10,7 +10,7 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 - **Lista pública de reclamações**, com busca e filtros por bairro, categoria e situação, ordenada pelas mais recentes ou pelas mais apoiadas.
 - **Cadastro e login** de munícipes.
 - **Minhas reclamações**: o munícipe acompanha tudo o que enviou, inclusive as reclamações aguardando validação e as recusadas, com o motivo.
-- **Registro de reclamação** com categoria, bairro, endereço e descrição.
+- **Registro de reclamação** com categoria, bairro, endereço e descrição. Ao escolher a categoria e o bairro, o sistema mostra reclamações parecidas já publicadas, para o morador apoiar a existente em vez de repetir.
 - **Apoio público**: cada munícipe pode apoiar uma reclamação uma vez, e o total fica visível para todos.
 - **Comentários** entre munícipes e respostas oficiais da ouvidoria.
 - **Andamento** de cada reclamação (Aberta, Em análise, Em execução, Resolvida), com a data de cada etapa.
