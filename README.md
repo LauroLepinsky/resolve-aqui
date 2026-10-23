@@ -15,7 +15,7 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 - **Comentários** entre munícipes e respostas oficiais da ouvidoria.
 - **Andamento** de cada reclamação (Aberta, Em análise, Em execução, Resolvida), com a data de cada etapa e a explicação da ouvidoria em cada mudança.
 - **Perfil da ouvidoria**, que pode atualizar a situação das reclamações.
-- **Painel público** com totais, reclamações por bairro e por categoria e as mais apoiadas.
+- **Painel público** com totais, tempo médio de resolução, reclamações por bairro e por categoria e as mais apoiadas.
 
 ## Tecnologias
 

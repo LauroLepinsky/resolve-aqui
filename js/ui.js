@@ -1,5 +1,8 @@
 // Funções de interface compartilhadas entre as páginas.
 
+const LINK_QUESTIONARIO =
+	"https://docs.google.com/forms/d/e/1FAIpQLScFI1zaAC3tZW5SIt8y5itbRkSBi34OvdZ6cEaOpC7z5uZ44A/viewform?fbzx=3663789956499798867";
+
 function esc(texto) {
 	return String(texto ?? "").replace(
 		/[&<>"']/g,
@@ -177,7 +180,11 @@ function ligarValidacao(raiz, aoConcluir) {
 function montarRodape() {
 	const el = document.querySelector("#rodape");
 	if (!el) return;
+	const convite = LINK_QUESTIONARIO
+		? `<p class="convite"><strong>Testou o protótipo?</strong> <a href="${esc(LINK_QUESTIONARIO)}" target="_blank" rel="noopener">Responda o questionário de avaliação</a> (cerca de 5 minutos, anônimo).</p>`
+		: "";
 	el.innerHTML = `
+    ${convite}
     <p>Protótipo acadêmico desenvolvido na disciplina Engenharia de Software III, Fatec Itapetininga. Os dados ficam salvos apenas neste navegador.</p>
     <button type="button" class="botao-link" id="btn-restaurar">Restaurar dados de demonstração</button>`;
 	el.querySelector("#btn-restaurar").addEventListener("click", () => {
