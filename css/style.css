@@ -1054,3 +1054,31 @@ textarea:focus {
 input[type="file"] {
 	padding: 0.45rem;
 }
+
+/* ---------- Mapa ---------- */
+
+.rotulo {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 0.35rem;
+}
+.mapa {
+	height: 18rem;
+	border: 2px solid var(--meio-fio);
+	border-radius: var(--raio);
+	z-index: 0;
+}
+#mapa-detalhe {
+	margin-top: 1rem;
+	height: 15rem;
+}
+.dica-mapa {
+	font-size: 0.9rem;
+	margin: 0.4rem 0 0;
+}
+.aviso-mapa {
+	margin: 0.4rem 0 0;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: #7a5b00;
+}

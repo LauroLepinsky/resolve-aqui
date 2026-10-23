@@ -31,6 +31,15 @@ function barras(itens, chave, link) {
 		.join("")}</ul>`;
 }
 
+// Tempo médio entre a publicação e a resolução das reclamações resolvidas
+const mediaDias = Dados.tempoMedioResolucao();
+const textoMedia =
+	mediaDias === null
+		? "Sem dados"
+		: mediaDias < 1
+			? "Menos de 1 dia"
+			: `${Math.round(mediaDias)} ${Math.round(mediaDias) === 1 ? "dia" : "dias"}`;
+
 const maisApoiadas = [...todas].sort((a, b) => b.apoios - a.apoios).slice(0, 3);
 
 document.querySelector("#painel").innerHTML = `
@@ -39,7 +48,9 @@ document.querySelector("#painel").innerHTML = `
     <div><dt>Aguardando resposta</dt><dd>${porStatus("aberta")}</dd></div>
     <div><dt>Resolvidas</dt><dd>${porStatus("resolvida")} <small style="font-size:1rem">(${taxa}%)</small></dd></div>
     <div><dt>Apoios recebidos</dt><dd>${totalApoios}</dd></div>
+    <div><dt>Tempo médio de resolução</dt><dd>${textoMedia}</dd></div>
   </dl>
+  <p class="dica-painel">O tempo médio conta da publicação da reclamação até ela ser marcada como resolvida.</p>
 
   <h2>Reclamações por bairro</h2>
   ${barras(Dados.bairros(), "bairroId", "bairro")}

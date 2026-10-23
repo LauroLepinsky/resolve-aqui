@@ -177,6 +177,30 @@ function ligarValidacao(raiz, aoConcluir) {
 	});
 }
 
+// ---------- Mapa (Leaflet + OpenStreetMap) ----------
+// Se a biblioteca não carregar (sem internet), as funções de mapa simplesmente não fazem nada.
+const CENTRO_ITAPETININGA = [-23.5886, -48.0483];
+
+function mapaDisponivel() {
+	return typeof L !== "undefined";
+}
+
+function criarMapa(elemento, centro = CENTRO_ITAPETININGA, zoom = 14) {
+	const mapa = L.map(elemento, { scrollWheelZoom: true }).setView(centro, zoom);
+	L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+		maxZoom: 19,
+		// O OpenStreetMap exige saber de qual site vem o pedido
+		referrerPolicy: "strict-origin-when-cross-origin",
+		attribution:
+			'&copy; colaboradores do <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	}).addTo(mapa);
+	return mapa;
+}
+
+function linkMapaExterno(lat, lng) {
+	return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=18/${lat}/${lng}`;
+}
+
 function montarRodape() {
 	const el = document.querySelector("#rodape");
 	if (!el) return;

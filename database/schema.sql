@@ -29,6 +29,9 @@ CREATE TABLE reclamacao (
     endereco VARCHAR(120) NOT NULL,
     foto_url VARCHAR(255),
     -- no protótipo, a foto fica no próprio navegador
+    latitude NUMERIC(9, 6),
+    -- local marcado no mapa (opcional)
+    longitude NUMERIC(9, 6),
     -- 'pendente' e 'recusada' são anteriores à publicação: só aparecem
     -- para o autor e para a ouvidoria
     status VARCHAR(12) NOT NULL DEFAULT 'pendente' CHECK (

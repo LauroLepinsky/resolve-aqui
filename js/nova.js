@@ -114,6 +114,102 @@ document.querySelector("#foto-remover").addEventListener("click", () => {
 	campoFoto.focus();
 });
 
+// ---------- Mapa: marcação opcional do local ----------
+let pontoMarcado = null;
+const PREFIXO_LOCAL = "Local marcado no mapa: ";
+
+// Troca (ou remove) só a linha do local, preservando o que o morador escreveu
+function atualizarLinhaLocal(texto) {
+	const semLocal = form.descricao.value
+		.split("\n")
+		.filter((linha) => !linha.startsWith(PREFIXO_LOCAL))
+		.join("\n")
+		.trimEnd();
+	const novo = !texto
+		? semLocal
+		: semLocal
+			? `${semLocal}\n${PREFIXO_LOCAL}${texto}`
+			: PREFIXO_LOCAL + texto;
+	if (novo.length > 1000) {
+		avisar(
+			"A descrição passaria de 1000 caracteres. Encurte o texto para incluir o local.",
+			"erro",
+		);
+		return;
+	}
+	form.descricao.value = novo;
+}
+
+// Busca o endereço aproximado do ponto no Nominatim (OpenStreetMap)
+async function enderecoDoPonto(lat, lng) {
+	const coordenadas = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+	try {
+		const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=pt-BR`;
+		const resposta = await fetch(url);
+		if (!resposta.ok) return coordenadas;
+		const dados = await resposta.json();
+		const a = dados.address || {};
+		const rua = [a.road, a.house_number].filter(Boolean).join(", ");
+		const bairro = a.suburb || a.neighbourhood || a.quarter || "";
+		const texto = [rua, bairro].filter(Boolean).join(" - ");
+		return texto ? `${texto} (aproximado)` : coordenadas;
+	} catch (e) {
+		return coordenadas;
+	}
+}
+
+if (mapaDisponivel()) {
+	document.querySelector("#campo-mapa").hidden = false;
+	const mapa = criarMapa("mapa-nova");
+	// ---------- Centraliza o mapa no bairro escolhido ----------
+	const avisoMapa = document.querySelector("#aviso-mapa");
+
+	function irParaBairro() {
+		const id = Number(form.bairro.value);
+		if (!id) return;
+		const posicao = POSICAO_BAIRROS[id];
+		if (posicao) {
+			// Vai até o bairro mantendo o zoom atual (no mínimo 15)
+			mapa.setView(posicao, Math.max(mapa.getZoom(), 15));
+			avisoMapa.hidden = true;
+		} else {
+			// Bairro sem posição conhecida: mostra a cidade e pede para aproximar
+			mapa.setView(CENTRO_ITAPETININGA, id === 1 ? 11 : 13);
+			avisoMapa.hidden = false;
+		}
+	}
+
+	form.bairro.addEventListener("change", irParaBairro);
+	irParaBairro();
+
+	const remover = document.querySelector("#mapa-remover");
+	let marcador = null;
+	let pedidoAtual = 0; // ignora respostas antigas se a pessoa clicar várias vezes
+
+	mapa.on("click", async (e) => {
+		pontoMarcado = e.latlng;
+		if (marcador) marcador.setLatLng(e.latlng);
+		else marcador = L.marker(e.latlng).addTo(mapa);
+		remover.hidden = false;
+
+		const pedido = ++pedidoAtual;
+		atualizarLinhaLocal("buscando endereço...");
+		const texto = await enderecoDoPonto(e.latlng.lat, e.latlng.lng);
+		if (pedido === pedidoAtual && pontoMarcado) atualizarLinhaLocal(texto);
+	});
+
+	remover.addEventListener("click", () => {
+		if (marcador) {
+			mapa.removeLayer(marcador);
+			marcador = null;
+		}
+		pontoMarcado = null;
+		pedidoAtual++;
+		atualizarLinhaLocal(null);
+		remover.hidden = true;
+	});
+}
+
 form.addEventListener("submit", (evento) => {
 	evento.preventDefault();
 	const valores = {
@@ -123,6 +219,8 @@ form.addEventListener("submit", (evento) => {
 		endereco: form.endereco.value,
 		descricao: form.descricao.value,
 		foto: fotoReduzida,
+		latitude: pontoMarcado ? pontoMarcado.lat : null,
+		longitude: pontoMarcado ? pontoMarcado.lng : null,
 	};
 
 	const faltando = [];
@@ -132,7 +230,11 @@ form.addEventListener("submit", (evento) => {
 		faltando.push("um título com pelo menos 5 caracteres");
 	if (!valores.endereco.trim())
 		faltando.push("o endereço ou ponto de referência");
-	if (valores.descricao.trim().length < 20)
+	const textoProprio = valores.descricao
+		.split("\n")
+		.filter((l) => !l.startsWith(PREFIXO_LOCAL))
+		.join("\n");
+	if (textoProprio.trim().length < 20)
 		faltando.push("uma descrição com pelo menos 20 caracteres");
 
 	if (faltando.length) {

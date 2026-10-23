@@ -14,6 +14,10 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		/>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="icon" href="assets/icone.svg" type="image/svg+xml" />
 	</head>
@@ -61,6 +65,27 @@
 					<label for="endereco">Endereço ou ponto de referência</label>
 					<input id="endereco" name="endereco" maxlength="120" required />
 				</div>
+				<div class="campo" id="campo-mapa" hidden>
+					<span class="rotulo" id="rotulo-mapa">Local no mapa (opcional)</span>
+					<div
+						class="mapa"
+						id="mapa-nova"
+						role="application"
+						aria-labelledby="rotulo-mapa"
+						aria-describedby="dica-mapa"
+					></div>
+					<p class="aviso-mapa" id="aviso-mapa" hidden>
+						Não temos a localização exata deste bairro. Aproxime o mapa e marque
+						o ponto manualmente.
+					</p>
+					<span class="dica" id="dica-mapa"
+						>Toque ou clique no mapa para marcar onde está o problema. Use os
+						botões + e - para aproximar.</span
+					>
+					<button type="button" class="botao-link" id="mapa-remover" hidden>
+						Remover marcação
+					</button>
+				</div>
 				<div class="campo">
 					<label for="descricao">Descrição</label>
 					<textarea
@@ -99,7 +124,9 @@
 			</form>
 		</main>
 		<footer class="rodape" id="rodape"></footer>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 		<script src="js/data.js"></script>
+		<script src="js/bairros-mapa.js"></script>
 		<script src="js/ui.js"></script>
 		<script src="js/nova.js"></script>
 	</body>

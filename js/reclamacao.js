@@ -170,10 +170,23 @@ function desenharDetalhe() {
     <section class="secao">
       <p class="endereco"><strong>Local:</strong> ${esc(r.endereco)}</p>
       <p class="descricao">${esc(r.descricao)}</p>
+      ${
+				r.latitude != null
+					? `
+        ${mapaDisponivel() ? '<div class="mapa" id="mapa-detalhe" aria-label="Mapa com o local da reclamação"></div>' : ""}
+        <p class="dica-mapa"><a href="${linkMapaExterno(r.latitude, r.longitude)}" target="_blank" rel="noopener">Abrir o local no OpenStreetMap</a></p>`
+					: ""
+			}
       ${r.foto ? `<figure class="foto"><img src="${esc(r.foto)}" alt="Foto enviada por ${esc(r.autor.nome)}"></figure>` : ""}
     </section>
     ${blocoValidacao}
     ${secoesPublicas}`;
+
+	const elMapa = document.querySelector("#mapa-detalhe");
+	if (elMapa) {
+		const mapa = criarMapa(elMapa, [r.latitude, r.longitude], 17);
+		L.marker([r.latitude, r.longitude]).addTo(mapa);
+	}
 
 	ligarValidacao(area, (mensagem) => {
 		desenharDetalhe();

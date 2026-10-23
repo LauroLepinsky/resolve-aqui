@@ -10,20 +10,17 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 - **Lista pública de reclamações**, com busca e filtros por bairro, categoria e situação, ordenada pelas mais recentes ou pelas mais apoiadas.
 - **Cadastro e login** de munícipes.
 - **Minhas reclamações**: o munícipe acompanha tudo o que enviou, inclusive as reclamações aguardando validação e as recusadas, com o motivo.
-- **Registro de reclamação** com categoria, bairro, endereço, descrição e foto opcional (reduzida automaticamente antes de salvar). Ao escolher a categoria e o bairro, o sistema mostra reclamações parecidas já publicadas, para o morador apoiar a existente em vez de repetir.
+- **Registro de reclamação** com categoria, bairro, endereço, descrição, foto opcional (reduzida automaticamente antes de salvar) e local opcional marcado no mapa. Ao escolher a categoria e o bairro, o sistema mostra reclamações parecidas já publicadas, para o morador apoiar a existente em vez de repetir.
 - **Apoio público**: cada munícipe pode apoiar uma reclamação uma vez, e o total fica visível para todos.
 - **Comentários** entre munícipes e respostas oficiais da ouvidoria.
 - **Andamento** de cada reclamação (Aberta, Em análise, Em execução, Resolvida), com a data de cada etapa e a explicação da ouvidoria em cada mudança.
 - **Perfil da ouvidoria**, que pode atualizar a situação das reclamações.
 - **Painel público** com totais, tempo médio de resolução, reclamações por bairro e por categoria e as mais apoiadas.
 
-## Questionário de avaliação
-
-Para mostrar o convite do questionário no rodapé de todas as páginas, cole o link do formulário na constante `LINK_QUESTIONARIO`, no início de `js/ui.js`.
-
 ## Tecnologias
 
 - HTML, CSS e JavaScript, sem frameworks
+- Mapa com Leaflet e OpenStreetMap, gratuitos e sem chave de acesso
 - Banco de dados relacional modelado em SQL (`database/schema.sql`)
 - Versionamento no GitHub e hospedagem na Vercel
 

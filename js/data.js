@@ -684,6 +684,8 @@ const Dados = {
 		descricao,
 		endereco,
 		foto,
+		latitude,
+		longitude,
 	}) {
 		const usuario = this.usuarioAtual();
 		if (!usuario)
@@ -710,6 +712,16 @@ const Dados = {
 				throw new Error("A foto não pôde ser processada. Tente outra imagem.");
 			}
 			r.foto = foto;
+		}
+		// Localização opcional marcada no mapa; aceita só pontos na região de Itapetininga
+		if (latitude != null && longitude != null) {
+			const lat = Number(latitude),
+				lng = Number(longitude);
+			if (!(lat > -24.3 && lat < -23.1 && lng > -48.7 && lng < -47.5)) {
+				throw new Error("O ponto marcado no mapa está fora de Itapetininga.");
+			}
+			r.latitude = Number(lat.toFixed(6));
+			r.longitude = Number(lng.toFixed(6));
 		}
 		db.reclamacoes.push(r);
 		db.historico.push({
