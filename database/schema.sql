@@ -68,6 +68,8 @@ CREATE TABLE historico_status (
     id SERIAL PRIMARY KEY,
     reclamacao_id INT NOT NULL REFERENCES reclamacao(id) ON DELETE CASCADE,
     status VARCHAR(12) NOT NULL,
+    observacao VARCHAR(300),
+    -- explicação da ouvidoria para os moradores
     usuario_id INT REFERENCES usuario(id),
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

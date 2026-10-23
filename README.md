@@ -13,7 +13,7 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 - **Registro de reclamação** com categoria, bairro, endereço e descrição. Ao escolher a categoria e o bairro, o sistema mostra reclamações parecidas já publicadas, para o morador apoiar a existente em vez de repetir.
 - **Apoio público**: cada munícipe pode apoiar uma reclamação uma vez, e o total fica visível para todos.
 - **Comentários** entre munícipes e respostas oficiais da ouvidoria.
-- **Andamento** de cada reclamação (Aberta, Em análise, Em execução, Resolvida), com a data de cada etapa.
+- **Andamento** de cada reclamação (Aberta, Em análise, Em execução, Resolvida), com a data de cada etapa e a explicação da ouvidoria em cada mudança.
 - **Perfil da ouvidoria**, que pode atualizar a situação das reclamações.
 - **Painel público** com totais, reclamações por bairro e por categoria e as mais apoiadas.
 

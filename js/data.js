@@ -437,14 +437,47 @@ function dadosIniciais() {
 		apoiosExternos: { 1: 31, 2: 18, 3: 9, 4: 24, 5: 12, 6: 40 },
 		historico: [
 			{ id: 1, reclamacaoId: 1, status: "aberta", criadoEm: diasAtras(12) },
-			{ id: 2, reclamacaoId: 1, status: "em_analise", criadoEm: diasAtras(8) },
+			{
+				id: 2,
+				reclamacaoId: 1,
+				status: "em_analise",
+				observacao:
+					"Encaminhada à Secretaria de Obras. Vistoria prevista para esta semana.",
+				criadoEm: diasAtras(8),
+			},
 			{ id: 3, reclamacaoId: 2, status: "aberta", criadoEm: diasAtras(9) },
 			{ id: 4, reclamacaoId: 3, status: "aberta", criadoEm: diasAtras(20) },
-			{ id: 5, reclamacaoId: 3, status: "em_analise", criadoEm: diasAtras(19) },
-			{ id: 6, reclamacaoId: 3, status: "resolvida", criadoEm: diasAtras(17) },
+			{
+				id: 5,
+				reclamacaoId: 3,
+				status: "em_analise",
+				observacao:
+					"Empresa de coleta notificada sobre a falha na rota de terça-feira.",
+				criadoEm: diasAtras(19),
+			},
+			{
+				id: 6,
+				reclamacaoId: 3,
+				status: "resolvida",
+				observacao: "Rota ajustada e coleta normalizada.",
+				criadoEm: diasAtras(17),
+			},
 			{ id: 7, reclamacaoId: 4, status: "aberta", criadoEm: diasAtras(15) },
-			{ id: 8, reclamacaoId: 4, status: "em_analise", criadoEm: diasAtras(11) },
-			{ id: 9, reclamacaoId: 4, status: "em_execucao", criadoEm: diasAtras(4) },
+			{
+				id: 8,
+				reclamacaoId: 4,
+				status: "em_analise",
+				observacao: "Vistoria confirmou o dano causado pelas raízes.",
+				criadoEm: diasAtras(11),
+			},
+			{
+				id: 9,
+				reclamacaoId: 4,
+				status: "em_execucao",
+				observacao:
+					"Equipe de manutenção iniciou o reparo da calçada e a poda das raízes.",
+				criadoEm: diasAtras(4),
+			},
 			{ id: 10, reclamacaoId: 5, status: "aberta", criadoEm: diasAtras(3) },
 			{ id: 11, reclamacaoId: 6, status: "aberta", criadoEm: diasAtras(1, 5) },
 			{
@@ -705,7 +738,7 @@ const Dados = {
 		salvar(db);
 	},
 
-	alterarStatus(reclamacaoId, status) {
+	alterarStatus(reclamacaoId, status, observacao) {
 		const usuario = this.usuarioAtual();
 		if (!usuario || usuario.perfil !== "gestor")
 			throw new Error("Somente a ouvidoria pode alterar o status.");
@@ -713,11 +746,16 @@ const Dados = {
 		const r = db.reclamacoes.find((x) => x.id === Number(reclamacaoId));
 		if (!r || !ehPublica(r) || !(status in STATUS))
 			throw new Error("Situação inválida para esta reclamação.");
+		if (!observacao || observacao.trim().length < 10)
+			throw new Error(
+				"Explique a mudança para os moradores, com pelo menos 10 caracteres.",
+			);
 		r.status = status;
 		db.historico.push({
 			id: db.proximoId.historico++,
 			reclamacaoId: r.id,
 			status,
+			observacao: observacao.trim(),
 			usuarioId: usuario.id,
 			criadoEm: new Date().toISOString(),
 		});

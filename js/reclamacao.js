@@ -54,9 +54,33 @@ function desenharDetalhe() {
 						.join("")}
         </select>
       </div>
+      <div class="campo campo--largo">
+        <label for="obs-status">Explicação para os moradores</label>
+        <textarea id="obs-status" maxlength="300" style="min-height:4.5rem" aria-describedby="dica-obs"></textarea>
+        <span class="dica" id="dica-obs">Diga o que foi feito ou o que vai acontecer. Fica visível no registro do andamento.</span>
+      </div>
       <button class="botao" type="submit">Salvar situação</button>
     </form>`
 			: "";
+
+	// Registro público de cada etapa, com a explicação da ouvidoria
+	const rotuloRegistro = (h) =>
+		({
+			pendente: "Reclamação enviada",
+			aberta: "Validada e publicada pela Ouvidoria",
+		})[h.status] || `Situação alterada para ${Dados.rotuloStatus(h.status)}`;
+	const registro = r.historico
+		.filter((h) => h.status !== "recusada")
+		.slice()
+		.reverse()
+		.map(
+			(h) => `
+    <li>
+      <time datetime="${h.criadoEm}">${new Date(h.criadoEm).toLocaleDateString("pt-BR")}</time>
+      <div><strong>${esc(rotuloRegistro(h))}</strong>${h.observacao ? `<p>${esc(h.observacao)}</p>` : ""}</div>
+    </li>`,
+		)
+		.join("");
 
 	const comentarios = r.comentarios.length
 		? r.comentarios
@@ -117,6 +141,8 @@ function desenharDetalhe() {
     <section class="secao" aria-labelledby="t-andamento">
       <h2 id="t-andamento">Andamento</h2>
       <ol class="trajeto">${etapas}</ol>
+      <h3 class="registro__titulo">Registro do andamento</h3>
+      <ol class="registro">${registro}</ol>
       ${painelGestor}
     </section>
 
@@ -192,11 +218,19 @@ function desenharDetalhe() {
 		fs.addEventListener("submit", (evento) => {
 			evento.preventDefault();
 			const novo = fs.querySelector("select").value;
+			const observacao = fs.querySelector("textarea").value;
 			if (novo === r.status) {
 				avisar("A situação escolhida já é a atual.");
 				return;
 			}
-			Dados.alterarStatus(r.id, novo);
+			if (observacao.trim().length < 10) {
+				avisar(
+					"Explique a mudança para os moradores, com pelo menos 10 caracteres.",
+					"erro",
+				);
+				return;
+			}
+			Dados.alterarStatus(r.id, novo, observacao);
 			desenharDetalhe();
 			avisar(`Situação atualizada para ${Dados.status()[novo].rotulo}.`);
 		});
