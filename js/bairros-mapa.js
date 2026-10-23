@@ -3,6 +3,26 @@
 // não foi encontrado, pelo ponto do meio entre ruas do bairro listadas na base
 // de CEPs dos Correios (ViaCEP). Bairros sem posição abrem o mapa no centro da cidade.
 
+// Bairros sem posição conhecida (10). Não foram encontrados no Nominatim
+// nem pelo nome nem pelas ruas do ViaCEP. Ao serem escolhidos, o mapa abre
+// no centro da cidade com um aviso para o morador aproximar manualmente.
+//   1: Área Rural de Itapetininga (abre com o município inteiro, zoom 11)
+//  11: Canta Galo
+//  36: Jardim das Rosas
+//  47: Jardim Nova Aliança
+//  59: Loteamento Jardim Esperança
+//  86: Sabiaúna
+//  88: Therezinha Piedade
+// 121: Vila Kalil Halak
+// 123: Vila Leonor
+// 139: Vila Palmeira
+//
+// Para incluir um deles, acrescente uma linha no formato
+//   id: [latitude, longitude], // Nome do bairro
+// (por exemplo, copiando as coordenadas do Google Maps: clique com o botão
+// direito no centro do bairro e clique no primeiro item do menu, que copia
+// a latitude e a longitude).
+
 const POSICAO_BAIRROS = {
 	// 1: sem posição conhecida (Área Rural de Itapetininga)
 	2: [-23.84234, -48.20747], // Bairro Biscoito Duro

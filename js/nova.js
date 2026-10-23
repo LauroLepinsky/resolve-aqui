@@ -118,18 +118,17 @@ document.querySelector("#foto-remover").addEventListener("click", () => {
 let pontoMarcado = null;
 const PREFIXO_LOCAL = "Local marcado no mapa: ";
 
-// Troca (ou remove) só a linha do local, preservando o que o morador escreveu
+let linhaLocalAtual = null; // texto exato que o site inseriu na descrição
+
+// Troca (ou remove) só o texto do local que o site inseriu, preservando o que o morador escreveu
 function atualizarLinhaLocal(texto) {
-	const semLocal = form.descricao.value
-		.split("\n")
-		.filter((linha) => !linha.startsWith(PREFIXO_LOCAL))
-		.join("\n")
-		.trimEnd();
-	const novo = !texto
-		? semLocal
-		: semLocal
-			? `${semLocal}\n${PREFIXO_LOCAL}${texto}`
-			: PREFIXO_LOCAL + texto;
+	let base = form.descricao.value;
+	if (linhaLocalAtual && base.includes(linhaLocalAtual)) {
+		base = base.replace(linhaLocalAtual, "");
+	}
+	base = base.replace(/\n{3,}/g, "\n\n").trim();
+	const linhaNova = texto ? PREFIXO_LOCAL + texto : null;
+	const novo = !linhaNova ? base : base ? `${base}\n${linhaNova}` : linhaNova;
 	if (novo.length > 1000) {
 		avisar(
 			"A descrição passaria de 1000 caracteres. Encurte o texto para incluir o local.",
@@ -138,6 +137,13 @@ function atualizarLinhaLocal(texto) {
 		return;
 	}
 	form.descricao.value = novo;
+	linhaLocalAtual = linhaNova;
+}
+
+// Texto escrito pelo morador, sem o local inserido pelo mapa
+function textoDoMorador() {
+	const descricao = form.descricao.value;
+	return linhaLocalAtual ? descricao.replace(linhaLocalAtual, "") : descricao;
 }
 
 // Busca o endereço aproximado do ponto no Nominatim (OpenStreetMap)
@@ -230,10 +236,7 @@ form.addEventListener("submit", (evento) => {
 		faltando.push("um título com pelo menos 5 caracteres");
 	if (!valores.endereco.trim())
 		faltando.push("o endereço ou ponto de referência");
-	const textoProprio = valores.descricao
-		.split("\n")
-		.filter((l) => !l.startsWith(PREFIXO_LOCAL))
-		.join("\n");
+	const textoProprio = textoDoMorador();
 	if (textoProprio.trim().length < 20)
 		faltando.push("uma descrição com pelo menos 20 caracteres");
 
