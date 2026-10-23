@@ -724,6 +724,22 @@ const Dados = {
 		salvar(db);
 	},
 
+	// Todas as reclamações do usuário conectado, inclusive as não publicadas
+	minhasReclamacoes() {
+		const usuario = this.usuarioAtual();
+		if (!usuario) return [];
+		const db = carregar();
+		return db.reclamacoes
+			.filter((r) => r.usuarioId === usuario.id)
+			.sort((a, b) => b.criadoEm.localeCompare(a.criadoEm))
+			.map((r) => ({
+				...r,
+				apoios: this.totalApoios(db, r.id),
+				comentarios: db.comentarios.filter((c) => c.reclamacaoId === r.id)
+					.length,
+			}));
+	},
+
 	// ---------- Validação pela ouvidoria ----------
 	exigirGestor() {
 		const usuario = this.usuarioAtual();

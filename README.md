@@ -9,6 +9,7 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 - **Validação pela ouvidoria**: toda reclamação nova fica "Aguardando validação" e só aparece para os outros moradores depois de aprovada. A ouvidoria também pode recusar, informando o motivo.
 - **Lista pública de reclamações**, com busca e filtros por bairro, categoria e situação, ordenada pelas mais recentes ou pelas mais apoiadas.
 - **Cadastro e login** de munícipes.
+- **Minhas reclamações**: o munícipe acompanha tudo o que enviou, inclusive as reclamações aguardando validação e as recusadas, com o motivo.
 - **Registro de reclamação** com categoria, bairro, endereço e descrição.
 - **Apoio público**: cada munícipe pode apoiar uma reclamação uma vez, e o total fica visível para todos.
 - **Comentários** entre munícipes e respostas oficiais da ouvidoria.
@@ -59,6 +60,7 @@ reclamacao.html   Detalhe, apoio, comentários e andamento
 entrar.html       Login e cadastro
 painel.html       Painel com números gerais
 validacao.html    Fila de validação da ouvidoria
+minhas.html       Reclamações do usuário conectado
 css/style.css     Estilos
 js/data.js        Camada de dados (localStorage)
 js/ui.js          Funções de interface compartilhadas

@@ -91,7 +91,7 @@ function montarCabecalho(paginaAtual) {
 	const conta = usuario
 		? `<span class="topo__usuario" title="${esc(usuario.email)}">
          <span class="avatar" aria-hidden="true">${esc(iniciais(usuario.nome))}</span>
-         <span class="topo__nome">${esc(usuario.nome.split(" ")[0])}${usuario.perfil === "gestor" ? " (Ouvidoria)" : ""}</span>
+         <span class="topo__nome">${usuario.perfil === "gestor" ? "Ouvidoria" : esc(usuario.nome.split(" ")[0])}</span>
        </span>
        <button type="button" class="botao-link" id="btn-sair">Sair</button>`
 		: link("entrar.html", "Entrar", "entrar");
@@ -106,6 +106,7 @@ function montarCabecalho(paginaAtual) {
         ${link("index.html", "Reclamações", "inicio")}
         ${link("painel.html", "Painel", "painel")}
         ${usuario && usuario.perfil === "gestor" ? linkValidacao(paginaAtual) : ""}
+        ${usuario && usuario.perfil === "municipe" ? link("minhas.html", "Minhas reclamações", "minhas") : ""}
         ${conta}
       </nav>
     </div>`;

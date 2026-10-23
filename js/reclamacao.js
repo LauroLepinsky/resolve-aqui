@@ -95,7 +95,7 @@ function desenharDetalhe() {
          </section>`
 				: `<div class="nota" role="status">
            <p><strong>Aguardando validação da Ouvidoria.</strong></p>
-           <p>A reclamação ficará pública, e poderá receber apoios e comentários, depois de aprovada.</p>
+           <p>A reclamação ficará pública, e poderá receber apoios e comentários, depois de aprovada. Acompanhe a situação em <a href="minhas.html">Minhas reclamações</a>.</p>
          </div>`;
 	} else if (r.status === "recusada") {
 		blocoValidacao = `<div class="nota nota--recusa">
