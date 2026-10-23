@@ -6,6 +6,7 @@ Protótipo desenvolvido na disciplina **Engenharia de Software III** do curso de
 
 ## O que o protótipo faz
 
+- **Validação pela ouvidoria**: toda reclamação nova fica "Aguardando validação" e só aparece para os outros moradores depois de aprovada. A ouvidoria também pode recusar, informando o motivo.
 - **Lista pública de reclamações**, com busca e filtros por bairro, categoria e situação, ordenada pelas mais recentes ou pelas mais apoiadas.
 - **Cadastro e login** de munícipes.
 - **Registro de reclamação** com categoria, bairro, endereço e descrição.
@@ -27,11 +28,11 @@ Nesta versão de protótipo, os dados ficam no `localStorage` do navegador, simu
 
 Senha de todas: `demo1234`
 
-| E-mail | Perfil |
-|---|---|
-| `maria@demo.com` | Munícipe |
-| `jose@demo.com` | Munícipe |
-| `gestor@demo.com` | Ouvidoria (altera a situação das reclamações) |
+| E-mail            | Perfil                                                         |
+| ----------------- | -------------------------------------------------------------- |
+| `maria@demo.com`  | Munícipe                                                       |
+| `jose@demo.com`   | Munícipe                                                       |
+| `gestor@demo.com` | Ouvidoria (valida reclamações novas e altera a situação delas) |
 
 Para apagar o que foi criado e voltar aos dados de exemplo, use o botão **Restaurar dados de demonstração** no rodapé.
 
@@ -57,6 +58,7 @@ nova.html         Registro de reclamação
 reclamacao.html   Detalhe, apoio, comentários e andamento
 entrar.html       Login e cadastro
 painel.html       Painel com números gerais
+validacao.html    Fila de validação da ouvidoria
 css/style.css     Estilos
 js/data.js        Camada de dados (localStorage)
 js/ui.js          Funções de interface compartilhadas

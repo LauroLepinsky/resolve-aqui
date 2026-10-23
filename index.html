@@ -1,61 +1,87 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reclamações | Resolve Aqui</title>
-  <meta name="description" content="Resolve Aqui: plataforma digital cívica para registrar, acompanhar e apoiar reclamações sobre serviços públicos municipais de Itapetininga.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
-</head>
-<body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-  <header class="topo" id="topo"></header>
-  <main id="conteudo">
-    <div class="cabecalho-pagina">
-      <div class="introducao">
-        <h1>O que precisa de conserto na cidade</h1>
-        <p>Veja os problemas que os moradores já registraram, apoie os que também afetam você e acompanhe o que a prefeitura respondeu.</p>
-      </div>
-      <a class="botao" href="nova.html">Registrar reclamação</a>
-    </div>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Reclamações | Resolve Aqui</title>
+		<meta
+			name="description"
+			content="Resolve Aqui: plataforma digital cívica para registrar, acompanhar e apoiar reclamações sobre serviços públicos municipais de Itapetininga."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" href="assets/icone.svg" type="image/svg+xml" />
+	</head>
+	<body>
+		<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+		<header class="topo" id="topo"></header>
+		<main id="conteudo">
+			<div class="cabecalho-pagina">
+				<div class="introducao">
+					<h1>O que precisa de conserto na cidade</h1>
+					<p>
+						Veja os problemas que os moradores já registraram, apoie os que
+						também afetam você e acompanhe o que a prefeitura respondeu.
+					</p>
+				</div>
+				<a class="botao" href="nova.html">Registrar reclamação</a>
+			</div>
 
-    <form class="filtros" id="filtros" role="search" aria-label="Filtrar reclamações">
-      <div class="filtro-busca">
-        <label for="f-busca">Buscar</label>
-        <input type="search" id="f-busca" name="busca" placeholder="Rua, problema ou palavra-chave">
-      </div>
-      <div>
-        <label for="f-bairro">Bairro</label>
-        <select id="f-bairro" name="bairro"></select>
-      </div>
-      <div>
-        <label for="f-categoria">Categoria</label>
-        <select id="f-categoria" name="categoria"></select>
-      </div>
-      <div>
-        <label for="f-status">Situação</label>
-        <select id="f-status" name="status"></select>
-      </div>
-    </form>
+			<form
+				class="filtros"
+				id="filtros"
+				role="search"
+				aria-label="Filtrar reclamações"
+			>
+				<div class="filtro-busca">
+					<label for="f-busca">Buscar</label>
+					<input
+						type="search"
+						id="f-busca"
+						name="busca"
+						placeholder="Rua, problema ou palavra-chave"
+					/>
+				</div>
+				<div>
+					<label for="f-bairro">Bairro</label>
+					<select id="f-bairro" name="bairro"></select>
+				</div>
+				<div>
+					<label for="f-categoria">Categoria</label>
+					<select id="f-categoria" name="categoria"></select>
+				</div>
+				<div>
+					<label for="f-status">Situação</label>
+					<select id="f-status" name="status"></select>
+				</div>
+			</form>
 
-    <div class="cabecalho-pagina" style="margin-bottom:.25rem;align-items:center">
-      <p class="contagem" id="contagem" aria-live="polite"></p>
-      <label class="contagem" for="f-ordem">Ordenar por
-        <select id="f-ordem" style="width:auto;min-height:2.2rem;margin-left:.4rem">
-          <option value="recentes">mais recentes</option>
-          <option value="apoios">mais apoiadas</option>
-        </select>
-      </label>
-    </div>
-    <ul class="lista" id="lista"></ul>
-  </main>
-  <footer class="rodape" id="rodape"></footer>
-  <script src="js/data.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/inicio.js"></script>
-</body>
+			<div
+				class="cabecalho-pagina"
+				style="margin-bottom: 0.25rem; align-items: center"
+			>
+				<p class="contagem" id="contagem" aria-live="polite"></p>
+				<label class="contagem" for="f-ordem"
+					>Ordenar por
+					<select
+						id="f-ordem"
+						style="width: auto; min-height: 2.2rem; margin-left: 0.4rem"
+					>
+						<option value="recentes">mais recentes</option>
+						<option value="apoios">mais apoiadas</option>
+					</select>
+				</label>
+			</div>
+			<ul class="lista" id="lista"></ul>
+		</main>
+		<footer class="rodape" id="rodape"></footer>
+		<script src="js/data.js"></script>
+		<script src="js/ui.js"></script>
+		<script src="js/inicio.js"></script>
+	</body>
 </html>

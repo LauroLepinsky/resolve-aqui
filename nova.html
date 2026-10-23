@@ -1,57 +1,85 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registrar reclamação | Resolve Aqui</title>
-  <meta name="description" content="Resolve Aqui: plataforma digital cívica para registrar, acompanhar e apoiar reclamações sobre serviços públicos municipais de Itapetininga.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
-</head>
-<body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-  <header class="topo" id="topo"></header>
-  <main id="conteudo">
-    <a class="voltar" href="index.html">Voltar para as reclamações</a>
-    <div class="introducao">
-      <h1>Registrar reclamação</h1>
-      <p>Descreva o problema com o máximo de detalhes. A reclamação fica pública para que outros moradores possam apoiar e comentar.</p>
-    </div>
-    <div class="erro" id="erro" role="alert"></div>
-    <form class="formulario" id="form-reclamacao" novalidate>
-      <div class="duas-colunas">
-        <div class="campo">
-          <label for="categoria">Categoria</label>
-          <select id="categoria" name="categoria" required></select>
-        </div>
-        <div class="campo">
-          <label for="bairro">Bairro</label>
-          <select id="bairro" name="bairro" required></select>
-        </div>
-      </div>
-      <div class="campo">
-        <label for="titulo">Título</label>
-        <input id="titulo" name="titulo" maxlength="80" required aria-describedby="dica-titulo">
-        <span class="dica" id="dica-titulo">Resuma o problema em uma frase. Exemplo: Poste apagado na Rua XV.</span>
-      </div>
-      <div class="campo">
-        <label for="endereco">Endereço ou ponto de referência</label>
-        <input id="endereco" name="endereco" maxlength="120" required>
-      </div>
-      <div class="campo">
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" name="descricao" maxlength="1000" required aria-describedby="dica-descricao"></textarea>
-        <span class="dica" id="dica-descricao">Conte desde quando o problema existe e como ele afeta quem mora ou passa pelo local. Mínimo de 20 caracteres.</span>
-      </div>
-      <button class="botao" type="submit">Publicar reclamação</button>
-    </form>
-  </main>
-  <footer class="rodape" id="rodape"></footer>
-  <script src="js/data.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/nova.js"></script>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Registrar reclamação | Resolve Aqui</title>
+		<meta
+			name="description"
+			content="Resolve Aqui: plataforma digital cívica para registrar, acompanhar e apoiar reclamações sobre serviços públicos municipais de Itapetininga."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" href="assets/icone.svg" type="image/svg+xml" />
+	</head>
+	<body>
+		<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+		<header class="topo" id="topo"></header>
+		<main id="conteudo">
+			<a class="voltar" href="index.html">Voltar para as reclamações</a>
+			<div class="introducao">
+				<h1>Registrar reclamação</h1>
+				<p>
+					Descreva o problema com o máximo de detalhes. Antes de ficar pública,
+					a reclamação passa pela validação da Ouvidoria. Depois de aprovada,
+					outros moradores podem apoiar e comentar.
+				</p>
+			</div>
+			<div class="erro" id="erro" role="alert"></div>
+			<form class="formulario" id="form-reclamacao" novalidate>
+				<div class="duas-colunas">
+					<div class="campo">
+						<label for="categoria">Categoria</label>
+						<select id="categoria" name="categoria" required></select>
+					</div>
+					<div class="campo">
+						<label for="bairro">Bairro</label>
+						<select id="bairro" name="bairro" required></select>
+					</div>
+				</div>
+				<div class="campo">
+					<label for="titulo">Título</label>
+					<input
+						id="titulo"
+						name="titulo"
+						maxlength="80"
+						required
+						aria-describedby="dica-titulo"
+					/>
+					<span class="dica" id="dica-titulo"
+						>Resuma o problema em uma frase. Exemplo: Poste apagado na Rua
+						XV.</span
+					>
+				</div>
+				<div class="campo">
+					<label for="endereco">Endereço ou ponto de referência</label>
+					<input id="endereco" name="endereco" maxlength="120" required />
+				</div>
+				<div class="campo">
+					<label for="descricao">Descrição</label>
+					<textarea
+						id="descricao"
+						name="descricao"
+						maxlength="1000"
+						required
+						aria-describedby="dica-descricao"
+					></textarea>
+					<span class="dica" id="dica-descricao"
+						>Conte desde quando o problema existe e como ele afeta quem mora ou
+						passa pelo local. Mínimo de 20 caracteres.</span
+					>
+				</div>
+				<button class="botao" type="submit">Enviar reclamação</button>
+			</form>
+		</main>
+		<footer class="rodape" id="rodape"></footer>
+		<script src="js/data.js"></script>
+		<script src="js/ui.js"></script>
+		<script src="js/nova.js"></script>
+	</body>
 </html>
