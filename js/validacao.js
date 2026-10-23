@@ -34,6 +34,7 @@ function desenharFila() {
         </div>
         <p class="endereco" style="margin:.75rem 0 0"><strong>Local:</strong> ${esc(r.endereco)}</p>
         <p class="descricao">${esc(r.descricao)}</p>
+        ${r.foto ? `<figure class="foto"><img src="${esc(r.foto)}" alt="Foto enviada por ${esc(r.autor.nome)}"></figure>` : ""}
         ${htmlValidacao(r)}
       </li>`,
 			)

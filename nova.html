@@ -75,6 +75,26 @@
 						passa pelo local. Mínimo de 20 caracteres.</span
 					>
 				</div>
+				<div class="campo">
+					<label for="foto">Foto do problema (opcional)</label>
+					<input
+						type="file"
+						id="foto"
+						name="foto"
+						accept="image/*"
+						aria-describedby="dica-foto"
+					/>
+					<span class="dica" id="dica-foto"
+						>Uma foto ajuda a Ouvidoria a entender e localizar o problema. Ela é
+						reduzida automaticamente antes do envio.</span
+					>
+					<div class="foto-previa" id="foto-previa" hidden>
+						<img alt="Prévia da foto escolhida" />
+						<button type="button" class="botao-link" id="foto-remover">
+							Remover foto
+						</button>
+					</div>
+				</div>
 				<button class="botao" type="submit">Enviar reclamação</button>
 			</form>
 		</main>

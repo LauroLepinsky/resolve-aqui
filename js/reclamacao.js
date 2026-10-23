@@ -170,6 +170,7 @@ function desenharDetalhe() {
     <section class="secao">
       <p class="endereco"><strong>Local:</strong> ${esc(r.endereco)}</p>
       <p class="descricao">${esc(r.descricao)}</p>
+      ${r.foto ? `<figure class="foto"><img src="${esc(r.foto)}" alt="Foto enviada por ${esc(r.autor.nome)}"></figure>` : ""}
     </section>
     ${blocoValidacao}
     ${secoesPublicas}`;

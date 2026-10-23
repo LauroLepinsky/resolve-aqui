@@ -518,11 +518,13 @@ function carregar() {
 	return db;
 }
 
+// Retorna false quando o navegador não consegue gravar (por exemplo, espaço cheio)
 function salvar(db) {
 	try {
 		localStorage.setItem(DB_KEY, JSON.stringify(db));
+		return true;
 	} catch (e) {
-		/* armazenamento indisponível */
+		return false;
 	}
 }
 
@@ -675,7 +677,14 @@ const Dados = {
 		};
 	},
 
-	criarReclamacao({ categoriaId, bairroId, titulo, descricao, endereco }) {
+	criarReclamacao({
+		categoriaId,
+		bairroId,
+		titulo,
+		descricao,
+		endereco,
+		foto,
+	}) {
 		const usuario = this.usuarioAtual();
 		if (!usuario)
 			throw new Error("Entre na sua conta para registrar uma reclamação.");
@@ -692,6 +701,16 @@ const Dados = {
 			status: "pendente",
 			criadoEm: agora,
 		};
+		// Foto já comprimida pelo formulário, guardada como imagem JPEG em texto (data URL)
+		if (foto) {
+			if (
+				!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(foto) ||
+				foto.length > 600000
+			) {
+				throw new Error("A foto não pôde ser processada. Tente outra imagem.");
+			}
+			r.foto = foto;
+		}
 		db.reclamacoes.push(r);
 		db.historico.push({
 			id: db.proximoId.historico++,
@@ -699,7 +718,13 @@ const Dados = {
 			status: "pendente",
 			criadoEm: agora,
 		});
-		salvar(db);
+		if (!salvar(db)) {
+			throw new Error(
+				r.foto
+					? 'O armazenamento do navegador está cheio. Tente enviar sem a foto ou use "Restaurar dados de demonstração" no rodapé.'
+					: "Não foi possível salvar a reclamação neste navegador.",
+			);
+		}
 		return r;
 	},
 
@@ -760,6 +785,32 @@ const Dados = {
 			criadoEm: new Date().toISOString(),
 		});
 		salvar(db);
+	},
+
+	// Média, em dias, entre a publicação e a resolução das reclamações resolvidas
+	tempoMedioResolucao() {
+		const db = carregar();
+		const tempos = db.reclamacoes
+			.filter((r) => r.status === "resolvida")
+			.map((r) => {
+				const etapas = db.historico.filter((h) => h.reclamacaoId === r.id);
+				const publicada =
+					etapas
+						.filter((h) => h.status === "aberta")
+						.map((h) => h.criadoEm)
+						.sort()[0] || r.criadoEm;
+				const resolvida = etapas
+					.filter((h) => h.status === "resolvida")
+					.map((h) => h.criadoEm)
+					.sort()
+					.pop();
+				return resolvida
+					? (new Date(resolvida) - new Date(publicada)) / 86400000
+					: null;
+			})
+			.filter((t) => t !== null);
+		if (!tempos.length) return null;
+		return tempos.reduce((a, b) => a + b, 0) / tempos.length;
 	},
 
 	// Todas as reclamações do usuário conectado, inclusive as não publicadas

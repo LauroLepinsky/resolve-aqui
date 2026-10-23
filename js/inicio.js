@@ -61,6 +61,7 @@ function desenhar() {
           <span>${esc(Dados.bairro(r.bairroId).nome)}</span>
           <span>${tempoRelativo(r.criadoEm)}</span>
           <span>${r.comentarios} ${r.comentarios === 1 ? "comentário" : "comentários"}</span>
+          ${r.foto ? "<span>Com foto</span>" : ""}
         </div>
       </div>
       <div class="contador" aria-label="${r.apoios} apoios">
